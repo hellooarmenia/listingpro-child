@@ -1,0 +1,451 @@
+/*
+ Theme Name:   Listingpro Child
+ | Shared by VestaThemes.com
+ Theme URI:    http://studio.cridio.com/listingpro/
+ Description:  Listingpro Child Theme
+ Author:       cridio team
+ Author URI:   http://cridio.com/
+ Template:     listingpro
+ Version:      1.0.6
+ Tags:         listingpro, directory, listing, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  listingpro
+*/
+.header-bg-color-class {
+    box-shadow: 0px 0px 2px #484848;
+}
+
+.lp-search-chnage-styles-st-fix {
+    width: 370px !important;
+}
+
+.header-bg-color-class {
+    transition: ease all 0.2s;
+    background-color: #000000b5 !important;
+}
+
+.header-bg-color-class:hover {
+    background-color: #000000cf !important;
+}
+
+.lp-customize-header-outer {
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+}
+
+.admin-bar .lp-customize-header-outer {
+    top: 32px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.vc_desktop .home-categories-area.new-banner-view-category-st.banner-view-cat-tranparent-category {
+    margin-top: 40px;
+}
+
+.vc_desktop .lp-home-categoires {
+    position: inherit;
+    right: unset;
+    display: unset;
+    left: unset;
+}
+
+.banner-view-cat-tranparent {
+    top: 80% !important;
+}
+
+.lp-home-banner-contianer {
+    height: unset !important;
+}
+
+.home .lp-header {
+    position: fixed !important;
+    width: 100%;
+}
+
+.vc_desktop .lp-home-categoires li {
+    width: 19%;
+    border: solid 1px #ddd;
+    margin: .5%;
+}
+
+.vc_desktop .lp-home-categoires li span {
+    width: 100%;
+}
+
+.vc_desktop .lp-home-categoires li p img {
+    width: 48px !important;
+    filter: grayscale(100%) sepia(1) saturate(1) brightness(46%) contrast(400%) hue-rotate(291deg) invert(0%);
+    -webkit-filter: grayscale(100%) sepia(1) saturate(1) brightness(46%) contrast(400%) hue-rotate(291deg) invert(0%);
+
+    height: 48px !important;
+}
+
+.vc_desktop .lp-home-categoires li * {
+    transition: 0.3s ease;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13):hover {
+    background-color: unset;
+}
+
+.vc_desktop .lp-home-categoires li:hover {
+    background-color: #e0e0e0;
+}
+
+.vc_desktop .lp-home-categoires li:hover span {
+    color: #272727 !important;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13):hover span {
+    color: #b71010 !important;
+}
+
+.vc_desktop .lp-home-categoires li:hover img {
+    filter: brightness(200%);
+    -webkit-filter: brightness(200%);
+}
+
+.vc_desktop .lp-home-categoires li p {
+    float: left;
+    margin-left: 10px !important;
+    background-color: unset !important;
+    border-right: solid 1px #ddd;
+    border-radius: 0px !important;
+    height: 70px !important;
+    width: 70px !important;
+    margin: 0px !important;
+}
+
+.vc_desktop .lp-home-categoires li span {
+    position: unset !important;
+}
+
+.vc_desktop .lp-home-categoires {
+    font-size: 0;
+}
+
+.vc_desktop .lp-home-categoires li a {
+    height: 70px;
+}
+
+.vc_desktop .banner-view-cat-tranparent-category .lp-upper-cat-view3 li a span p#cat-img-bg {
+    line-height: 70px;
+}
+
+.vc_desktop .banner-view-cat-tranparent-category .lp-upper-cat-view3 li:hover a span p#cat-img-bg {
+    background-color: #9d3d3a !important;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13) {
+    width: 20%;
+    margin: 0;
+    border: none;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13) {
+    margin-top: 18px;
+    padding-left: 32px;
+    list-style-type: square !important;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13) p {
+    display: none !important;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13) span:before {
+    content: "\25A0";
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13) a {
+    text-align: left;
+    height: unset;
+}
+
+.vc_desktop .lp-home-categoires li:nth-child(n+13) br {
+    display: none;
+}
+
+.lp-listing-top-title-header.with-cover {
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: 90px;
+}
+
+.lp-listing-top-title-header.with-cover:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #00000000;
+}
+
+.lp-listing-top-title-header.with-cover .lp-listing-name h1 {
+    color: #fff !important;
+    text-shadow: 0px 0px 4px #000;
+}
+
+.lp-listing-action-btns {
+    height: 50px !important;
+}
+
+.header-container.lp-header-bg .lp-customize-header-outer .lp-menu-container .lp-menu ul li.wpml-ls-menu-item a span {
+    color: #cecece;
+}
+
+.lp-joinus-icon-outer, .lp-add-listing-btn {
+    display: none;
+}
+
+.logged-in .lp-joinus-icon-outer {
+    display: block;
+}
+
+
+.lp-nav-menu-after.lp-menu-outer::after {
+    display: none;
+}
+
+.ult-carousel-wrapper button:before {
+    display: none;
+
+}
+
+.carousel_custom_field {
+    color: red;
+}
+
+footer ul {
+    padding-left: 20px;
+}
+
+footer a,
+footer h2,
+footer p,
+footer span,
+footer {
+    color: #b1b1b1;
+}
+
+footer ul > li li {
+    font-size: 12px;
+    list-style: square;
+}
+
+.lp-listing-logo {
+    background-size: contain;
+    background-position: center center;
+}
+
+.page-container-five {
+    padding-top: 0px;
+}
+
+.lp-marker-label-logo {
+    float: left;
+    padding: 0px 5px 0 0px;
+}
+
+.lp-marker-label {
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: solid 1px #eee;
+}
+
+.lp-marker-label:hover {
+    background: #ddd;
+}
+
+.lp-branches-list p {
+    margin-bottom: 0;
+    margin-top: 0;
+    line-height: 1.4em;
+    font-size: 13px;
+    clear: both;
+    text-align: right;
+}
+
+.lp-branches-list h4 {
+    font-size: 13px;
+    line-height: 1.2em;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.lp-branches-list {
+    height: 400px;
+    overflow: auto;
+    background: #ffffff;
+}
+
+.branches-map {
+    height: 400px;
+    border: #ccc solid 1px;
+}
+
+.branches-map img {
+    max-width: inherit !important;
+}
+
+.lp-listing-desription {
+    display: block;
+    clear: both;
+    margin-top: 20px;
+}
+
+.lp-branches-view {
+    display: inline-block;
+    width: 100%;
+}
+
+.lp-listing-top-header-slider {
+    position: absolute;
+    top: 0;
+}
+
+.lp-listing-top-title-header {
+    height: 500px;
+    padding-top: 190px !important;
+}
+
+
+/* Shortcodes */
+
+.lp_categories_list {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+.lp_categories_list > div {
+    margin-top: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.lp_categories_list > div:hover > div {
+    background-color: #ddd;
+}
+
+.lp_categories_list > div:hover > div:first-child {
+    background-color: #9a3b39
+}
+
+.lp_categories_list > div:hover > div img {
+    filter: brightness(200%);
+    -webkit-filter: brightness(200%);
+}
+
+.lp_categories_list > div > div {
+    height: 100%;
+    padding: 10px;
+    color: #ddd;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.lp_categories_list > div > div a {
+    color: #444;
+}
+
+.lp_categories_list > div > div + div {
+    border-right: solid 1px;
+}
+
+.lp_categories_list > div > div img {
+    filter: grayscale(100%) sepia(1) saturate(1) brightness(46%) contrast(400%) hue-rotate(291deg) invert(0%);
+    -webkit-filter: grayscale(100%) sepia(1) saturate(1) brightness(46%) contrast(400%) hue-rotate(291deg) invert(0%);
+}
+
+.lp_categories_list > div > div span {
+    color: #444;
+}
+
+.lp_categories_list {
+    padding: 0;
+}
+
+.archive-search .lp-header-search-form input.dropdown_fields {
+    width: 404px !important;
+}
+
+.archive-search.lp-header-search.archive-search .lp-search-icon {
+    left: 15px !important;
+}
+
+
+/* Sticky sidebar */
+@media only screen and (min-width: 992px) {
+    .lp-sticky-sidebar-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .lp-sticky-sidebar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
+}
+
+
+/* Branches link view */
+
+.lp-branches-link-view > .lp-branches-link-view-row > div {
+    display: inline-block;
+}
+
+.lp-branches-link-view-image-container > img {
+    width: 48px;
+}
+
+.lp-branches-link-view-image-container {
+    float: left;
+}
+
+.lp-branches-link-view-content-container > * {
+    margin: 0;
+}
+
+.lp-branches-link-view-content-container > a {
+    float: right
+}
+
+.lp-branches-link-view-content-container {
+    margin-left: 10px;
+    width: calc(100% - 58px)
+}
+
+.lp-branches-link-view > .lp-branches-link-view-row {
+    margin-top: 20px;
+}
+
+.lp-branches-link-view {
+    margin-bottom: 20px;
+}
+
+
+.lp-header-search-filters {
+    display: none !important;
+}
+
+.lp-archive-banner {
+    min-height: 300px;
+    background-position: center center;
+    background-size: contain;
+}
+
+.listing-page-sidebar .lp-widget ul li, .lp-widget .lp-listing-price-range, .lp-listing-additional-details h4, .listing-page-sidebar .lp-widget #singlepostmap {
+    overflow: hidden;
+}
