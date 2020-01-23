@@ -449,3 +449,7 @@ footer ul > li li {
 .listing-page-sidebar .lp-widget ul li, .lp-widget .lp-listing-price-range, .lp-listing-additional-details h4, .listing-page-sidebar .lp-widget #singlepostmap {
     overflow: hidden;
 }
+
+.sidebar-top0 {
+    top: 120px !important;
+}
