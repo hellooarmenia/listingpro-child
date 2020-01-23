@@ -50,6 +50,7 @@
 			if(!empty($locations_search_type) && $locations_search_type=="auto_loc"){
 				$locArea = $listingpro_options['lp_listing_search_locations_range'];
 			}
+
 		?>
 		<div class="lp-search-bar">
 			<form autocomplete="off" class="form-inline" action="<?php echo home_url(); ?>" method="get" accept-charset="UTF-8">

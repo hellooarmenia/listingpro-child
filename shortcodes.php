@@ -29,3 +29,32 @@ function lp_categories_list($atts)
 
     return $html;
 }
+
+
+add_shortcode('lp_search_form', 'lp_search_form');
+
+function lp_search_form($atts)
+{
+    global $listingpro_options;
+    $search_placeholder     = $listingpro_options['search_placeholder'];
+    $template_dir_url       = get_template_directory_uri();
+    $more_results_for_label = __('More results for', 'listingpro');
+    $value = isset($_GET['select']) ? $_GET['select'] : '';
+    $html                   = <<<html
+<form method="get" action="/">
+<input autocomplete="off" type="text" 
+    class="lp-suggested-search js-typeahead-input lp-search-input form-control ui-autocomplete-input dropdown_fields"
+    name="select" placeholder="{$search_placeholder}"
+    data-prev-value='0'
+    value="{$value}"
+    data-noresult="{$more_results_for_label}">
+<input type="hidden" name="s" value="home">
+<input type="hidden" name="post_type" value="listing">
+<input type="submit" value="submit" style="position:absolute;visibility: hidden;">
+</form>
+html;
+
+
+    return $html;
+}
+
