@@ -13,13 +13,14 @@ $locName = '';
 $catterm = '';
 $parent = '';
 $loc_ID = '';
-$lpstag = '';
+$lpstag =   '';
 $locationID = '';
 global $paged;
 $taxTaxDisplay = true;
 
 
-$listCats = array();
+
+$listCats=array();
 $catIcon = '';
 $defaultCats = null;
 global $listingpro_options;
@@ -31,7 +32,7 @@ $lp_what_field_switcher = $listingpro_options['lp_what_field_switcher'];
 $search_loc_field_hide = $listingpro_options['lp_location_loc_switcher'];
 $hideWhereClass = '';
 $searchHide = '';
-if (isset($search_loc_field_hide) && $search_loc_field_hide == 1) {
+if(isset($search_loc_field_hide) && $search_loc_field_hide==1){
     $hideWhereClass = "hide-where";
     $searchHide = "search-hide";
 } else {
@@ -39,7 +40,7 @@ if (isset($search_loc_field_hide) && $search_loc_field_hide == 1) {
 }
 $hideWhatClass = '';
 $whatHide = '';
-if (isset($lp_what_field_switcher) && $lp_what_field_switcher == 1) {
+if(isset($lp_what_field_switcher) && $lp_what_field_switcher==1){
     $hideWhatClass = "hide-what";
     $whatHide = "what-hide";
 } else {
@@ -49,106 +50,250 @@ if (isset($lp_what_field_switcher) && $lp_what_field_switcher == 1) {
 
 $srchBr = '';
 $slct = '';
-if ($home_srch_loc_switchr == true) {
+if ( $home_srch_loc_switchr == true ) {
     $srchBr = 'ui-widget';
     $slct = 'select2';
-} else {
+}else {
     $srchBr = 'ui-widget border-dropdown';
     $slct = 'chosen-select5';
 }
 
 $locOption = '';
-if ($search_loc_option == 'yes') {
+if ($search_loc_option == 'yes' && is_front_page()) {
     $locOption = 'yes';
-} elseif ($search_loc_option == 'no') {
+}elseif ($search_loc_option == 'no') {
     $locOption = 'no';
 }
 
 $locations_search_type = $listingpro_options['lp_listing_search_locations_type'];
 $locArea = '';
-if (!empty($locations_search_type) && $locations_search_type == "auto_loc") {
+if(!empty($locations_search_type) && $locations_search_type=="auto_loc"){
     $locArea = $listingpro_options['lp_listing_search_locations_range'];
 }
 
-if (!isset($_GET['s'])) {
+if( !isset($_GET['s'])){
     $queried_object = get_queried_object();
     $term_id = $queried_object->term_id;
     $taxName = $queried_object->taxonomy;
-    if (!empty($term_id)) {
+    if(!empty($term_id)){
         $termID = get_term_by('id', $term_id, $taxName);
         $termName = $termID->name;
         $parent = $termID->parent;
         $term_ID = $termID->term_id;
-        if (is_tax('location')) {
+        if(is_tax('location')){
             $loc_ID = $termID->term_id;
-        } elseif (is_tax('features')) {
+            $locName = $termName;
+        }
+        elseif(is_tax('features')){
             $feature_ID = $termID->term_id;
-        } elseif (is_tax('list-tags')) {
+        }
+
+        elseif(is_tax('list-tags')){
             $lpstag = $termID->term_id;
         }
 
 
     }
-} elseif (isset($_GET['lp_s_cat']) || isset($_GET['lp_s_tag']) || isset($_GET['lp_s_loc'])) {
-    if (isset($_GET['lp_s_cat']) && !empty($_GET['lp_s_cat'])) {
-        $sterm = $_GET['lp_s_cat'];
-        $term_ID = $_GET['lp_s_cat'];
+}
+elseif(isset($_GET['lp_s_cat']) || isset($_GET['lp_s_tag']) || isset($_GET['lp_s_loc']))
+{
+    if(isset($_GET['lp_s_cat']) && !empty($_GET['lp_s_cat'])){
+        $sterm = wp_kses_post($_GET['lp_s_cat']);
+        $term_ID = wp_kses_post($_GET['lp_s_cat']);
         $termo = get_term_by('id', $sterm, 'listing-category');
         $parent = $termo->parent;
     }
-    if (isset($_GET['lp_s_cat']) && empty($_GET['lp_s_cat']) && isset($_GET['lp_s_tag']) && !empty($_GET['lp_s_tag'])) {
-        $sterm = $_GET['lp_s_tag'];
+    if(isset($_GET['lp_s_cat']) && empty($_GET['lp_s_cat']) && isset($_GET['lp_s_tag']) && !empty($_GET['lp_s_tag'])){
+        $sterm = wp_kses_post($_GET['lp_s_tag']);
+        $lpstag = wp_kses_post($_GET['lp_s_tag']);
     }
 
-    if (isset($_GET['lp_s_cat']) && !empty($_GET['lp_s_cat']) && isset($_GET['lp_s_tag']) && !empty($_GET['lp_s_tag'])) {
-        $sterm = $_GET['lp_s_tag'];
+    if(isset($_GET['lp_s_cat']) && !empty($_GET['lp_s_cat']) && isset($_GET['lp_s_tag']) && !empty($_GET['lp_s_tag'])){
+        $sterm = wp_kses_post($_GET['lp_s_tag']);
+        $lpstag = wp_kses_post($_GET['lp_s_tag']);
     }
 
-    if (isset($_GET['lp_s_loc']) && !empty($_GET['lp_s_loc'])) {
-        $loc_ID = $_GET['lp_s_loc'];
+    if(isset($_GET['lp_s_loc']) && !empty($_GET['lp_s_loc'])){
+        $loc_ID = wp_kses_post($_GET['lp_s_loc']);
     }
 }
+
+
 
 
 ?>
 <div class="col-md-12">
     <div class="lp-search-bar lp-header-search-form text-center">
-        <form autocomplete="off" class="form-inline" action="<?php echo home_url(); ?>" method="get"
-              accept-charset="UTF-8">
+        <form autocomplete="off" class="form-inline" action="<?php echo home_url(); ?>" method="get" accept-charset="UTF-8">
             <?php
-            if (is_archive() || is_search()):
+            if( is_archive() || is_search() ):
                 ?>
                 <div class="select-filter" id="searchform">
-                    <div class="pos-relative">
-                        <div class="what-placeholder pos-relative" data-holder="">
-                            <input autocomplete="off" type="text"
-                                   class="lp-suggested-search js-typeahead-input lp-search-input form-control ui-autocomplete-input dropdown_fields"
-                                   name="select" id="select" placeholder="<?php echo $search_placeholder; ?>"
-                                   data-prev-value='0'
-                                   data-noresult="<?php echo esc_html__('More results for', 'listingpro'); ?>">
-                            <i class="cross-search-q fa fa-times-circle" aria-hidden="true"></i>
-                            <img class='loadinerSearch' width="100px"
-                                 src="<?php echo get_template_directory_uri() . '/assets/images/search-load.gif' ?>"/>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <select class="chosen-select2" id="searchcategory">
+                        <option value=""><?php echo esc_html__( 'All Categories', 'listingpro' );?></option>
 
-                        </div>
-                        <div id="input-dropdown">
-                            <ul>
-                                <?php
+                        <?php
+                        $args = array(
+                            'post_type' => 'listing',
+                            'order' => 'ASC',
+                            'hide_empty' => false,
+                            'parent' => 0,
+                        );
+                        $locations = get_terms( 'listing-category',$args);
+                        foreach($locations as $location) {
+                            if($term_ID == $location->term_id){
+                                $selected = 'selected';
+                            }else{
+                                $selected = '';
+                            }
+                            echo '<option '.$selected.' value="'.$location->term_id.'">'.$location->name.'</option>';
 
-                                $args = array(
+                            $args1 = array(
+                                'post_type' => 'listing',
+                                'order' => 'ASC',
+                                'hide_empty' => false,
+                                'parent' => $location->term_id,
+                            );
+                            $locations1 = get_terms( 'listing-category',$args1);
+                            foreach($locations1 as $location1) {
+                                if($term_ID == $location1->term_id){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                echo '<option '.$selected.' value="'.$location1->term_id.'">-'.$location1->name.'</option>';
+
+                                $args2 = array(
                                     'post_type' => 'listing',
                                     'order' => 'ASC',
                                     'hide_empty' => false,
-                                    'parent' => 0,
+                                    'parent' => $location1->term_id,
                                 );
-                                $default_search_cats = '';
-                                if (isset($listingpro_options['default_search_cats'])) {
-                                    $default_search_cats = $listingpro_options['default_search_cats'];
+                                $locations2 = get_terms( 'listing-category',$args2);
+                                foreach($locations2 as $location2) {
+                                    if($term_ID == $location2->term_id){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    echo '<option '.$selected.' value="'.$location2->term_id.'">--'.$location2->name.'</option>';
+
+                                    $args3 = array(
+                                        'post_type' => 'listing',
+                                        'order' => 'ASC',
+                                        'hide_empty' => false,
+                                        'parent' => $location2->term_id,
+                                    );
+                                    $locations3 = get_terms( 'listing-category',$args3);
+                                    foreach($locations3 as $location3) {
+                                        if($term_ID == $location3->term_id){
+                                            $selected = 'selected';
+                                        }else{
+                                            $selected = '';
+                                        }
+                                        echo '<option '.$selected.' value="'.$location3->term_id.'">---'.$location3->name.'</option>';
+
+
+                                    }
+
                                 }
-                                if (empty($default_search_cats)) {
-                                    $listCatTerms = get_terms('listing-category', $args);
-                                    if (!empty($listCatTerms) && !is_wp_error($listCatTerms)) {
-                                        foreach ($listCatTerms as $term) {
+
+                            }
+
+                        }
+                        ?>
+                    </select>
+
+                    <input type="hidden" name="clat">
+                    <input type="hidden" name="clong">
+
+
+                </div>
+            <?php endif; ?>
+            <?php
+            if( isset($lp_what_field_switcher) && $lp_what_field_switcher==0 ){
+                ?>
+                <div class="<?php if( is_archive() || is_search() ): ?>right-margin-20<?php endif; ?> form-group lp-suggested-search <?php echo esc_attr($hideWhereClass); ?> <?php echo esc_attr($hideWhatClass); ?>">
+                    <?php
+                    if( (isset($lp_what_field_switcher) && $lp_what_field_switcher==0) ||(isset($search_loc_field_hide) && $search_loc_field_hide==0) ){
+                        if( ( is_archive() || is_search() ) && !wp_is_mobile() ){
+                            ?>
+                            <div class="form-group <?php echo esc_attr($searchHide); ?>">
+                                <div class="lp-search-bar-right">
+                                    <a href="#" class="keyword-ajax">Go</a>
+                                    <!--
+                                <img src="<?php //echo get_stylesheet_directory_uri(); ?>/assets/images/searchloader.gif" class="searchloading">
+                            -->
+                                </div>
+                            </div>
+                        <?php } } ?>
+
+                    <?php
+                    if( ( is_archive() || is_search() ) && !wp_is_mobile() ) {
+                        ?>
+                        <div class="input-group-addon lp-border input-group-addon-keyword"><?php esc_html_e('Keyword', 'listingpro'); ?></div>
+                        <div class="pos-relative">
+                            <div class="what-placeholder pos-relative lp-search-form-what" data-holder="">
+                                <input autocomplete="off" type="text"
+                                       class="lp-suggested-search js-typeahead-input lp-search-input form-control ui-autocomplete-input dropdown_fields"
+                                       name="select" id="skeyword-filter" placeholder="<?php echo $search_placeholder; ?>"
+                                       data-prev-value='0'
+                                       data-noresult="<?php echo esc_html__('More results for', 'listingpro'); ?>">
+                                <i class="cross-search-q fa fa-times-circle" aria-hidden="true"></i>
+
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <div class="input-group-addon lp-border"><?php esc_html_e('What', 'listingpro'); ?></div>
+                        <div class="pos-relative">
+                            <div class="what-placeholder pos-relative lp-search-form-what" data-holder="">
+                                <input autocomplete="off" type="text"
+                                       class="lp-suggested-search js-typeahead-input lp-search-input form-control ui-autocomplete-input dropdown_fields"
+                                       name="select" id="select" placeholder="<?php echo $search_placeholder; ?>"
+                                       data-prev-value='0'
+                                       data-noresult="<?php echo esc_html__('More results for', 'listingpro'); ?>">
+                                <i class="cross-search-q fa fa-times-circle" aria-hidden="true"></i>
+                                <img class='loadinerSearch' width="100px"
+                                     src="<?php echo get_template_directory_uri() . '/assets/images/search-load.gif' ?>"/>
+
+                            </div>
+                            <div id="input-dropdown">
+                                <ul>
+                                    <?php
+
+                                    $args = array(
+                                        'post_type' => 'listing',
+                                        'order' => 'ASC',
+                                        'hide_empty' => false,
+                                        'parent' => 0,
+                                    );
+                                    $default_search_cats = '';
+                                    if (isset($listingpro_options['default_search_cats'])) {
+                                        $default_search_cats = $listingpro_options['default_search_cats'];
+                                    }
+                                    if (empty($default_search_cats)) {
+                                        $listCatTerms = get_terms('listing-category', $args);
+                                        if (!empty($listCatTerms) && !is_wp_error($listCatTerms)) {
+                                            foreach ($listCatTerms as $term) {
+                                                $catIcon = listingpro_get_term_meta($term->term_id, 'lp_category_image');
+                                                if (!empty($catIcon)) {
+                                                    $catIcon = '<img class="d-icon" src="' . $catIcon . '" />';
+                                                }
+                                                echo '<li class="lp-wrap-cats" data-catid="' . $term->term_id . '">' . $catIcon . '<span class="lp-s-cat">' . $term->name . '</span></li>';
+
+                                                $defaultCats .= '<li class="lp-wrap-cats" data-catid="' . $term->term_id . '">' . $catIcon . '<span class="lp-s-cat">' . $term->name . '</span></li>';
+
+
+                                            }
+                                        }
+                                    } else {
+                                        foreach ($default_search_cats as $catTermID) {
+                                            $term = get_term_by('id', $catTermID, 'listing-category');
                                             $catIcon = listingpro_get_term_meta($term->term_id, 'lp_category_image');
                                             if (!empty($catIcon)) {
                                                 $catIcon = '<img class="d-icon" src="' . $catIcon . '" />';
@@ -160,69 +305,61 @@ if (!isset($_GET['s'])) {
 
                                         }
                                     }
-                                } else {
-                                    foreach ($default_search_cats as $catTermID) {
-                                        $term = get_term_by('id', $catTermID, 'listing-category');
-                                        $catIcon = listingpro_get_term_meta($term->term_id, 'lp_category_image');
-                                        if (!empty($catIcon)) {
-                                            $catIcon = '<img class="d-icon" src="' . $catIcon . '" />';
-                                        }
-                                        echo '<li class="lp-wrap-cats" data-catid="' . $term->term_id . '">' . $catIcon . '<span class="lp-s-cat">' . $term->name . '</span></li>';
+                                    ?>
 
-                                        $defaultCats .= '<li class="lp-wrap-cats" data-catid="' . $term->term_id . '">' . $catIcon . '<span class="lp-s-cat">' . $term->name . '</span></li>';
-
-
-                                    }
-                                }
-                                ?>
-
-                            </ul>
-                            <div style="display:none" id="def-cats"><?php echo $defaultCats; ?></div>
+                                </ul>
+                                <div style="display:none" id="def-cats"><?php echo $defaultCats; ?></div>
+                            </div>
                         </div>
-                    </div>
+                        <?php
+                    }
+                    ?>
 
                 </div>
-            <?php endif; ?>
+            <?php } ?>
 
             <?php
-            if (isset($search_loc_field_hide) && $search_loc_field_hide == 0) {
-                if (!empty($locations_search_type) && $locations_search_type == "auto_loc") {
+            if( isset($search_loc_field_hide) && $search_loc_field_hide==0 ){
+                if( !empty($locations_search_type) && $locations_search_type=="auto_loc" )
+                {
+
+                    $sLocID = '';
+                    if(!empty($loc_ID)){
+                        $sLocID = $loc_ID;
+                    }
+
                     ?>
                     <div class="form-group lp-location-auto-fix lp-location-search <?php echo esc_attr($hideWhatClass); ?>">
                         <?php
-                        if ((is_archive() || is_search()) && !wp_is_mobile()) {
+                        if( ( is_archive() || is_search() ) && !wp_is_mobile() ){
                             ?>
-                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Location',
-                                    'listingpro'); ?></div>
-                        <?php } else { ?>
-                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Where',
-                                    'listingpro'); ?></div>
+                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Location','listingpro'); ?></div>
+                        <?php }else{ ?>
+                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Where','listingpro'); ?></div>
                         <?php } ?>
                         <div data-option="<?php echo esc_attr($locOption); ?>" class="<?php echo esc_attr($srchBr); ?>">
                             <i class="fa fa-crosshairs"></i>
-                            <input autocomplete="off" id="cities" class="form-control"
-                                   data-country="<?php echo $locArea; ?>"
-                                   placeholder="<?php echo $location_default_text; ?>">
-                            <input type="hidden" autocomplete="off" id="lp_search_loc" name="lp_s_loc">
+                            <input autocomplete="off" id="cities" class="form-control" data-country="<?php echo $locArea; ?>" placeholder="<?php echo $location_default_text; ?>" value="<?php echo $locName; ?>">
+                            <input type="hidden" autocomplete="off" id="lp_search_loc" name="lp_s_loc" value="<?php echo $sLocID; ?>">
                         </div>
                     </div>
                     <?php
-                } elseif (!empty($locations_search_type) && $locations_search_type == "manual_loc") {
+                }
+                elseif( !empty($locations_search_type) && $locations_search_type=="manual_loc" )
+                {
                     ?>
                     <div class="form-group lp-location-search <?php echo esc_attr($hideWhatClass); ?>">
                         <?php
-                        if ((is_archive() || is_search()) && !wp_is_mobile()) {
+                        if( ( is_archive() || is_search() ) && !wp_is_mobile() ){
                             ?>
-                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Location',
-                                    'listingpro'); ?></div>
-                        <?php } else { ?>
-                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Where',
-                                    'listingpro'); ?></div>
+                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Location','listingpro'); ?></div>
+                        <?php }else{ ?>
+                            <div class="input-group-addon lp-border lp-where"><?php esc_html_e('Where','listingpro'); ?></div>
                         <?php } ?>
                         <div data-option="<?php echo esc_attr($locOption); ?>" class="<?php echo esc_attr($srchBr); ?>">
                             <i class="fa fa-crosshairs"></i>
                             <?php
-                            if (is_front_page())
+                            if( is_front_page() )
                             {
                             ?>
                             <select class="<?php echo esc_attr($slct); ?>" name="lp_s_loc" id="searchlocation">
@@ -243,20 +380,86 @@ if (!isset($_GET['s'])) {
                                         'hide_empty' => false,
                                         'parent' => 0,
                                     );
-                                    $locations = get_terms('location', $args);
-                                    if (!empty($locations) && !is_wp_error($locations)) {
-                                        foreach ($locations as $location) {
-                                            if ($loc_ID == $location->term_id) {
+                                    $locations = get_terms( 'location',$args);
+                                    if ( ! empty( $locations ) && ! is_wp_error( $locations ) ){
+                                        foreach($locations as $location) {
+                                            if($loc_ID == $location->term_id){
                                                 $selected = 'selected';
-                                            } else {
+                                            }else{
                                                 $selected = '';
                                             }
-                                            echo '<option ' . $selected . ' value="' . $location->term_id . '">' . $location->name . '</option>';
-                                            $sub = get_term_children($location->term_id, 'location');
-                                            foreach ($sub as $subID) {
-                                                $locationTerm = get_term_by('id', $subID, 'location');
-                                                echo '<option ' . $selected . ' class="sub_cat" value="' . $locationTerm->term_id . '">-&nbsp;&nbsp;' . $locationTerm->name . '</option>';
+                                            echo '<option '.$selected.' value="'.$location->term_id.'">'.$location->name.'</option>';
+
+                                            $args1 = array(
+                                                'post_type' => 'listing',
+                                                'order' => 'ASC',
+                                                'hide_empty' => false,
+                                                'parent' => $location->term_id,
+                                            );
+
+                                            //$sub = get_term_children( $location->term_id, 'location' );
+                                            $locations1 = get_terms( 'location',$args1);
+                                            if ( ! empty( $locations1 ) && ! is_wp_error( $locations1 ) ){
+                                                foreach($locations1 as $location1) {
+                                                    if($loc_ID == $location1->term_id){
+                                                        $selected = 'selected';
+                                                    }else{
+                                                        $selected = '';
+                                                    }
+                                                    echo '<option '.$selected.' value="'.$location1->term_id.'">-&nbsp;&nbsp;'.$location1->name.'</option>';
+
+                                                    //2nd
+                                                    $args2 = array(
+                                                        'post_type' => 'listing',
+                                                        'order' => 'ASC',
+                                                        'hide_empty' => false,
+                                                        'parent' => $location1->term_id,
+                                                    );
+
+                                                    //$sub = get_term_children( $location->term_id, 'location' );
+                                                    $locations2 = get_terms( 'location',$args2);
+                                                    if ( ! empty( $locations2 ) && ! is_wp_error( $locations2 ) ){
+                                                        foreach($locations2 as $location2) {
+                                                            if($loc_ID == $location2->term_id){
+                                                                $selected = 'selected';
+                                                            }else{
+                                                                $selected = '';
+                                                            }
+                                                            echo '<option '.$selected.' value="'.$location2->term_id.'">--&nbsp;&nbsp;'.$location2->name.'</option>';
+
+                                                            //3rd
+
+                                                            $args3 = array(
+                                                                'post_type' => 'listing',
+                                                                'order' => 'ASC',
+                                                                'hide_empty' => false,
+                                                                'parent' => $location2->term_id,
+                                                            );
+
+                                                            //$sub = get_term_children( $location->term_id, 'location' );
+                                                            $locations3 = get_terms( 'location',$args3);
+                                                            if ( ! empty( $locations3 ) && ! is_wp_error( $locations3 ) ){
+                                                                foreach($locations3 as $location3) {
+                                                                    if($loc_ID == $location3->term_id){
+                                                                        $selected = 'selected';
+                                                                    }else{
+                                                                        $selected = '';
+                                                                    }
+                                                                    echo '<option '.$selected.' value="'.$location3->term_id.'">---&nbsp;&nbsp;'.$location3->name.'</option>';
+
+
+
+
+                                                                }
+                                                            }
+
+
+                                                        }
+                                                    }
+
+                                                }
                                             }
+
                                         }
                                     }
                                     ?>
@@ -267,35 +470,22 @@ if (!isset($_GET['s'])) {
                 }
             }
 
-            if ((isset($lp_what_field_switcher) && $lp_what_field_switcher == 0) || (isset($search_loc_field_hide) && $search_loc_field_hide == 0)) {
-                if (is_home() || is_front_page() || wp_is_mobile()) {
+            if( (isset($lp_what_field_switcher) && $lp_what_field_switcher==0) ||(isset($search_loc_field_hide) && $search_loc_field_hide==0) ){
+                if( is_home() || is_front_page() || wp_is_mobile() ){
 
                     ?>
                     <div class="form-group <?php echo esc_attr($searchHide); ?>">
                         <div class="lp-search-bar-right">
                             <input value="" class="lp-search-btn lp-search-form-submit" type="submit">
                             <i class="icons8-search lp-search-icon"></i>
-                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/ellipsis.gif"
-                                 class="searchloading">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/ellipsis.gif" class="searchloading">
                             <!--
-										<img src="<?php //echo get_stylesheet_directory_uri();
-                            ?>/assets/images/searchloader.gif" class="searchloading">
+										<img src="<?php //echo get_stylesheet_directory_uri(); ?>/assets/images/searchloader.gif" class="searchloading">
 									-->
                         </div>
                     </div>
-                <?php }
-            } ?>
-            <div class="form-group pull-right <?php echo esc_attr($searchHide); ?>">
-                <div class="lp-search-bar-right">
-                    <input value="<?php echo apply_filters('lp_search_label','Search');?>" class="lp-search-btn" type="submit">
-                    <i class="icons8-search lp-search-icon"></i>
-                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/ellipsis.gif" class="searchloading">
-                    <!--
-										<img src="<?php //echo get_stylesheet_directory_uri(); ?>/assets/images/searchloader.gif" class="searchloading">
-									-->
-                </div>
-            </div>
-            <input type="hidden" name="lp_s_tag" id="lp_s_tag" value="<?php echo $lpstag; ?>">
+                <?php } } ?>
+            <input type="hidden" name="lp_s_tag" id="lpstag" value="<?php echo $lpstag; ?>">
             <input type="hidden" name="lp_s_cat" id="lp_s_cat" value="<?php echo $term_ID; ?>">
             <input type="hidden" name="s" value="home">
             <input type="hidden" name="post_type" value="listing">
