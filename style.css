@@ -453,3 +453,7 @@ footer ul > li li {
 .sidebar-top0 {
     top: 120px !important;
 }
+
+.lp-header-search.archive-search {
+    display: none;
+}
