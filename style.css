@@ -202,8 +202,8 @@
     color: #cecece;
 }
 
-.lp-joinus-icon-outer, .lp-add-listing-btn {
-    display: none;
+.lp-add-listing-btn {
+    display: none !important;
 }
 
 .logged-in .lp-joinus-icon-outer {
@@ -454,6 +454,6 @@ footer ul > li li {
     top: 120px !important;
 }
 
-.lp-header-search.archive-search {
-    display: none;
-}
+/*.lp-header-search.archive-search {*/
+/*    display: none;*/
+/*}*/
