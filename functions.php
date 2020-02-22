@@ -4,12 +4,13 @@ add_filter('acf/settings/remove_wp_meta_box', '__return_false');
 
 include "helloo/cpt.php";
 include "helloo/ads.php";
+include "helloo/i18n.php";
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 function my_theme_enqueue_styles()
 {
     wp_enqueue_style('listingpr-parent-style', get_template_directory_uri() . '/style.css');
-    wp_enqueue_script('listingpr-parent-script', get_stylesheet_directory_uri() . '/assets/script.js',[],'0.6',true);
+    wp_enqueue_script('listingpr-parent-script', get_stylesheet_directory_uri() . '/assets/script.js', [], '0.12', true);
 }
 
 include "shortcodes.php";
@@ -19,13 +20,13 @@ function create_post_type()
     register_post_type(
         'partner_reviews',
         array(
-            'labels'      => array(
-                'name'          => __('Partner Reviews'),
+            'labels' => array(
+                'name' => __('Partner Reviews'),
                 'singular_name' => __('Partner Review')
             ),
-            'public'      => true,
+            'public' => true,
             'has_archive' => true,
-            'supports'    => array('title', 'editor', 'thumbnail', 'custom-fields')
+            'supports' => array('title', 'editor', 'thumbnail', 'custom-fields')
 
         )
     );
@@ -94,6 +95,7 @@ add_filter(
     }
 );
 
+
 add_filter('wp_nav_menu_items', 'do_shortcode');
 
 add_action(
@@ -110,23 +112,28 @@ add_action(
 
 global $helloo_labels;
 $helloo_labels = [
-    'Search'                      => 'Փնտրել',
-    'Where'                       => 'Որտեղ',
-    'What'                        => 'Ինչ',
-    'Be the first to review'      => 'Եղիր առաջինը և գրիր քո կարծիքը',
+    'Search' => 'Փնտրել',
+    'Where' => 'Որտեղ',
+    'No Results'=>'Որոնման արդյունքներ չեն գտնվել',
+    'Visit Here'=>'Գնալ առաջին էջ',
+    'Sorry! You have not selected any list as favorite.'=>'Դուք չունեք ոչ մի նախընտրելի կազմակերպություն․',
+    'Go and select lists as favorite'=>'Ընտրել կազմակերպթյուններ որպես նախընտրելի',
+    'More results for ' => 'Որոնման արդյունքներ։ ',
+    'What' => 'Ինչ',
+    'Be the first to review' => 'Եղիր առաջինը և գրիր քո կարծիքը',
     'Contact with business owner' => 'Կապվել կազմակերպության հետ',
-    'Name:'                       => 'Անուն։',
-    'Email:'                      => 'Էլ․փոստ։',
-    'Phone'                       => 'Հեռախոս։',
-    'Message:'                    => 'Նամակ։',
-    'I Agree'                     => 'Ես համաձայն եմ',
-    'Send'                        => 'Ուղարկել',
-    'Write a review'              => 'Գրել կարծիք',
-    'Your Rating'                 => 'Ձեր գնահատականը',
-    'Select Images'               => 'Ընտրել նկարներ',
-    'Browse'                      => 'Դիտարկել',
-    'Save'                        => 'Պահպանել',
-    'Share'                       => 'Կիսվել'
+    'Name:' => 'Անուն։',
+    'Email:' => 'Էլ․փոստ։',
+    'Phone' => 'Հեռախոս։',
+    'Message:' => 'Նամակ։',
+    'I Agree' => 'Ես համաձայն եմ',
+    'Send' => 'Ուղարկել',
+    'Write a review' => 'Գրել կարծիք',
+    'Your Rating' => 'Ձեր գնահատականը',
+    'Select Images' => 'Ընտրել նկարներ',
+    'Browse' => 'Դիտարկել',
+    'Save' => 'Պահպանել',
+    'Share' => 'Կիսվել'
 ];
 
 add_filter(
