@@ -10,8 +10,24 @@
  Tags:         listingpro, directory, listing, right-sidebar, responsive-layout, accessibility-ready
  Text Domain:  listingpro
 */
+
+.listing-style4 .lp-sidebar {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.listing-style4 .lp-sidebar .lp-widget.map-widget {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+}
+
 .header-bg-color-class {
-    box-shadow: 0px 0px 2px #484848;
+    box-shadow: 0 0 2px #484848;
 }
 
 .lp-search-chnage-styles-st-fix {
@@ -27,11 +43,6 @@
     background-color: #000000cf !important;
 }
 
-.lp-customize-header-outer {
-    position: fixed;
-    top: 0;
-    z-index: 99999;
-}
 
 .admin-bar .lp-customize-header-outer {
     top: 32px;
@@ -385,17 +396,19 @@ footer ul > li li {
 }
 
 
+
 /* Sticky sidebar */
 @media only screen and (min-width: 992px) {
-    .lp-sticky-sidebar-wrapper {
+
+    .lp-section.listing-style4 .container>.row{
         display: flex;
         justify-content: space-between;
     }
 
-    .lp-sticky-sidebar {
+    .lp-sidebar {
         position: -webkit-sticky;
         position: sticky;
-        top: 0;
+        top: 120px;
     }
 }
 
