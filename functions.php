@@ -13,6 +13,24 @@ function my_theme_enqueue_styles()
     wp_enqueue_script('listingpr-parent-script', get_stylesheet_directory_uri() . '/assets/script.js', [], '0.12', true);
 }
 
+
+add_action('wp_head', function () {
+    ?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158944313-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-158944313-1');
+    </script>
+    <?php
+});
 include "shortcodes.php";
 
 function create_post_type()
@@ -113,16 +131,45 @@ add_action(
 global $helloo_labels;
 $helloo_labels = [
     'Search' => 'Փնտրել',
+    "Near Me" => "Իմ Մոտակայքում",
+    "Click To GET" => "Սեղմեք դիտարկելու համար",
+    "Best Match" => "Լավագույն արդյունքները",
+    "Click To See Your Best Match" => "Սեղմեք Տեսնելու Համար Լավագույն արդյունքները",
+    'Sort By' => 'Դասավորել Ըստ։',
+    'Most Reviewed' => 'Ամենաշատ Քննարկումների',
+    'Most Viewed' => 'Ամենաշատ Դիտումների',
+    'Highest Rated' => 'Բարձր Գնահատականների',
+    'Add a Review ' => 'Ավելացնել կարծիք',
     'Where' => 'Որտեղ',
-    'No Results'=>'Որոնման արդյունքներ չեն գտնվել',
-    'Visit Here'=>'Գնալ առաջին էջ',
-    'Sorry! You have not selected any list as favorite.'=>'Դուք չունեք ոչ մի նախընտրելի կազմակերպություն․',
-    'Go and select lists as favorite'=>'Ընտրել կազմակերպթյուններ որպես նախընտրելի',
+    'Title' => 'Վերնագիր',
+    'Review' => 'Կարծիք',
+    'Submit Review' => 'Հրապարակել Կարծիքը',
+    'Example: It was an awesome experience to be there' => 'Օրինակ։ Հրաշալի ծառայություններ են մատուցում հաճախորդներին',
+    'Your review recommended to be at least 140 characters long :)' => 'Ցանկալի է որ Ձեր կարծիքը պարունակի ոչ պակաս քան 140 սիմվոլ․',
+    'Signup & Submit Review ' => 'Մուտք գործել և մեկնաբանել',
+    'No Results' => 'Որոնման արդյունքներ չեն գտնվել',
+    'Visit Here' => 'Գնալ առաջին էջ',
+    'Sorry! You have not selected any list as favorite.' => 'Դուք չունեք ոչ մի նախընտրելի կազմակերպություն․',
+    'Go and select lists as favorite' => 'Ընտրել կազմակերպթյուններ որպես նախընտրելի',
     'More results for ' => 'Որոնման արդյունքներ։ ',
     'What' => 'Ինչ',
     'Be the first to review' => 'Եղիր առաջինը և գրիր քո կարծիքը',
-    'Contact with business owner' => 'Կապվել կազմակերպության հետ',
+    'Contact with business owner' => 'Առաջարկությունների և անճշտությունների համար կապվեք մեզ հետ',
     'Name:' => 'Անուն։',
+    'Expand'=>'Բացել',
+    'Sign In'=>'Մոտւք Գործել',
+    'Sign in'=>'Մոտւք Գործել',
+    'Not a member? Sign up'=>'Մասնակից չե՞ք, գրանցվել հիմա․',
+    'Already have an account? Sign in'=>'Մասնակից ե՞ք, Մուտք գործեք համակարգ․',
+    'Forgot Password'=>'Մոռացել եմ գաղտնաբառը',
+    'Username *'=>'Օգտատիրոջ անվանումը *',
+    'Password will be e-mailed to you.'=>'Գաղտնաբառը կստանաք նամակի միջոցով։',
+    'Register'=>'Գրանցվել',
+    'Username or Email Address *'=>'Օգտատիրոջ անվանումը կամ Էլ․Փոստը *',
+    'Password *'=>'Գաղտնաբառ *',
+    'Keep me signed in'=>'Պահել ինձ համակարգում',
+    'Sign Up'=>'Գրանցվել',
+    'Email Address *'=>'Էլեկտրոնային փոստ *',
     'Email:' => 'Էլ․փոստ։',
     'Phone' => 'Հեռախոս։',
     'Message:' => 'Նամակ։',
@@ -133,7 +180,15 @@ $helloo_labels = [
     'Select Images' => 'Ընտրել նկարներ',
     'Browse' => 'Դիտարկել',
     'Save' => 'Պահպանել',
-    'Share' => 'Կիսվել'
+    'Share' => 'Կիսվել',
+    'Get Directions' => 'Նշել Ուղին',
+    'Day Off!' => 'Ավարտված աշխատանքային օր',
+    'Today' => 'Այսօր',
+    'Additional Details' => 'Հավելյալ Տեղեկություններ',
+    'Own or work here?' => 'Սեփականատե՞րն եք։',
+    'Claim Now!' => "Հայտնել մեզ",
+    'User Name' => "Օգտատերի անունը",
+    'Email' => "Էլ․ Փոստ",
 ];
 
 add_filter(
