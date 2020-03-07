@@ -16,17 +16,13 @@ function my_theme_enqueue_styles()
 
 add_action('wp_head', function () {
     ?>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158944313-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
         function gtag() {
             dataLayer.push(arguments);
         }
-
         gtag('js', new Date());
-
         gtag('config', 'UA-158944313-1');
     </script>
     <?php
@@ -157,8 +153,8 @@ $helloo_labels = [
     'Contact with business owner' => 'Առաջարկությունների և անճշտությունների համար կապվեք մեզ հետ',
     'Name:' => 'Անուն։',
     'Expand'=>'Բացել',
-    'Sign In'=>'Մոտւք Գործել',
-    'Sign in'=>'Մոտւք Գործել',
+    'Sign In'=>'Մուտք Գործել',
+    'Sign in'=>'Մուտք Գործել',
     'Not a member? Sign up'=>'Մասնակից չե՞ք, գրանցվել հիմա․',
     'Already have an account? Sign in'=>'Մասնակից ե՞ք, Մուտք գործեք համակարգ․',
     'Forgot Password'=>'Մոռացել եմ գաղտնաբառը',
