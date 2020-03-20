@@ -6,7 +6,7 @@
  Author:       cridio team
  Author URI:   http://cridio.com/
  Template:     listingpro
- Version:      1.0.6
+ Version:      1.0.7
  Tags:         listingpro, directory, listing, right-sidebar, responsive-layout, accessibility-ready
  Text Domain:  listingpro
 */
@@ -467,6 +467,6 @@ footer ul > li li {
     top: 120px !important;
 }
 
-/*.lp-header-search.archive-search {*/
-/*    display: none;*/
-/*}*/
+.lp-header-search.archive-search {
+    display: none;
+}
