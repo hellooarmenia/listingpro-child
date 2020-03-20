@@ -185,14 +185,24 @@ $helloo_labels = [
     'Claim Now!' => "Հայտնել մեզ",
     'User Name' => "Օգտատերի անունը",
     'Email' => "Էլ․ Փոստ",
+    'Review for '=>'Մեկնաբանություն - ',
+    'Review For '=>'Մեկնաբանություն - ',
+    "Interesting"=>'Հետաքրքիր',
+    "LOL"=>'Զվարճալի',
+    "Love"=>'Սիրելի',
+    "Report"=>'Բողոք',
+    "Was this review ...?"=>"Ինչպիսի՞ն է մեկնաբանությունը․",
+    "Reviews"=>"Մեկնաբանություններ"
 ];
 
-add_filter(
-    'gettext',
-    function ($translation, $text) {
-        global $helloo_labels;
-        return $helloo_labels[$text] ?? $translation;
-    },
-    10,
-    2
-);
+if(!is_admin()) {
+    add_filter(
+        'gettext',
+        function ($translation, $text) {
+            global $helloo_labels;
+            return $helloo_labels[$text] ?? $translation;
+        },
+        10,
+        2
+    );
+}
