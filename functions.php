@@ -5,6 +5,8 @@ add_filter('acf/settings/remove_wp_meta_box', '__return_false');
 include "helloo/cpt.php";
 include "helloo/ads.php";
 include "helloo/i18n.php";
+include "helloo/cf.php";
+
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 function my_theme_enqueue_styles()
@@ -150,7 +152,7 @@ $helloo_labels = [
     'More results for ' => 'Որոնման արդյունքներ։ ',
     'What' => 'Ինչ',
     'Be the first to review' => 'Եղիր առաջինը և գրիր քո կարծիքը',
-    'Contact with business owner' => 'Առաջարկությունների և անճշտությունների համար կապվեք մեզ հետ',
+    'Contact with business owner' => 'Ուղարկել նամակ',
     'Name:' => 'Անուն։',
     'Expand'=>'Բացել',
     'Sign In'=>'Մուտք Գործել',

@@ -470,3 +470,11 @@ footer ul > li li {
 .lp-header-search.archive-search {
     display: none;
 }
+
+.lp-listing-additional-details.lp-widget-inner-wrap > h4 {
+    display: none;
+}
+
+.nf-form-fields-required {
+    display: none;
+}
