@@ -396,11 +396,10 @@ footer ul > li li {
 }
 
 
-
 /* Sticky sidebar */
 @media only screen and (min-width: 992px) {
 
-    .lp-section.listing-style4 .container>.row{
+    .lp-section.listing-style4 .container > .row {
         display: flex;
         justify-content: space-between;
     }
@@ -477,4 +476,8 @@ footer ul > li li {
 
 .nf-form-fields-required {
     display: none;
+}
+
+.lp-section.lp-section-detail-page {
+    min-height: 900px;
 }

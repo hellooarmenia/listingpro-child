@@ -151,6 +151,7 @@ $helloo_labels = [
     'Go and select lists as favorite' => 'Ընտրել կազմակերպթյուններ որպես նախընտրելի',
     'More results for ' => 'Որոնման արդյունքներ։ ',
     'What' => 'Ինչ',
+    'Tip: A great review covers food, service, and ambiance. Got recommendations for your favorite dishes and drinks, or something everyone should try here? Include that too! And remember.'=>'Օրինակ։ Շատ հավանեցի այս ռեստորանը։ Խորհուրդ եմ տալիս անպայման այցելել։',
     'Be the first to review' => 'Եղիր առաջինը և գրիր քո կարծիքը',
     'Contact with business owner' => 'Ուղարկել նամակ',
     'Name:' => 'Անուն։',
@@ -194,7 +195,9 @@ $helloo_labels = [
     "Love"=>'Սիրելի',
     "Report"=>'Բողոք',
     "Was this review ...?"=>"Ինչպիսի՞ն է մեկնաբանությունը․",
-    "Reviews"=>"Մեկնաբանություններ"
+    "Reviews"=>"Մեկնաբանություններ",
+    "Reviews For"=>"Կարծիքներ",
+    "john"=>"Հովհաննես",
 ];
 
 if(!is_admin()) {

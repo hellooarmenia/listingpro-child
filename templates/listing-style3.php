@@ -60,7 +60,7 @@ if(have_posts()):
 
         $author_email = get_the_author_meta( 'user_email' );
 
-
+        $email = listing_get_metabox('email');
 
         $facebook = listing_get_metabox('facebook');
 
